@@ -8,16 +8,13 @@ import { LOAD_REPOS } from 'containers/App/constants';
 import { reposLoaded, repoLoadingError } from 'containers/App/actions';
 
 import request from 'utils/request';
-import { makeSelectUsername } from 'containers/HomePage/selectors';
+import { selectHomeForm } from 'containers/HomePage/selectors';
 
 /**
  * Github repos request/response handler
  */
-export function* getRepos() {
-  // Select username from store
-  const username = yield select(makeSelectUsername());
-  const requestURL = `https://api.github.com/users/${username}/repos?type=all&sort=updated`;
-
+export function* getRepos(actionData) {
+  const requestURL = `https://api.github.com/users/${actionData.username}/repos?type=all&sort=updated`;
   try {
     // Call our request helper (see 'utils/request')
     const repos = yield call(request, requestURL);

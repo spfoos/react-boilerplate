@@ -3,15 +3,12 @@
  */
 
 import { createSelector } from 'reselect';
+// import { getFormValues } from 'redux-form';
 
-const selectHome = (state) => state.get('home');
-
-const makeSelectUsername = () => createSelector(
-  selectHome,
-  (homeState) => homeState.get('username')
-);
+const selectHomeForm = (state) => {
+    state.get('form');
+}
 
 export {
-  selectHome,
-  makeSelectUsername,
+  selectHomeForm,
 };
